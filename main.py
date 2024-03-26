@@ -2,8 +2,9 @@ import os
 from termcolor import colored
 
 from services.tac_query import getModel
-from services.utils import testing, getUserConfirmation
+from services.utils import validateCode, writeToFile
 from services.price_query import getProductData
+from services.display_results import display
 
 
 if __name__ == "__main__":
@@ -13,33 +14,28 @@ if __name__ == "__main__":
     #Welcome Sequence
     while(not done):
         os.system('cls')
-        print(colored("+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+", color="cyan"))
+        print(colored("+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+\n", color="cyan"))
 
-        print("\nWelcome! To retrieve Canadian shopping prices for your device, please enter your TAC code below. \nIf you are here by mistake and would like to exit the program, enter 'exit'.\n")
-        code = input("Enter your 8-digit TAC code: ")
-        if code == "exit": done = True
+        print("Welcome! To retrieve Canadian shopping prices for your device, please enter your TAC code below.\n")
+        code = input("Enter your 8-digit TAC code or 'exit' to quit: ")
+        if code == "exit": break
+        while(not validateCode(code=code)):
+            code = input("Invalid input: Enter your 8-digit TAC code: ")
+
+        os.system('cls')
+        print(colored("+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+\n", color="cyan"))
+        model = getModel(code=code)
+        if model is None: pass
         else:
-            confirm = getUserConfirmation(f"TAC code: {code}. Is this correct? (Y/N): ")
-            while confirm == "N":
-                code = input("Please enter your code again again: ")
-                confirm = getUserConfirmation(f"TAC code: {code}. Is this correct? (Y/N): ")
+            os.system('cls')
+            print(colored("+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+\n", color="cyan"))
+            productArray = getProductData(model=model)
 
             os.system('cls')
-            print(colored("+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+", color="cyan"))
-            model = getModel(code=code)
+            print(colored("+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+\n", color="cyan"))
+            saved = display(productArray)
+            writeToFile(saved)
 
-            os.system('cls')
-            print(colored("+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+", color="cyan"))
-            productArray = getProductData(query=model)
-
-            os.system('cls')
-            print(colored("+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+", color="cyan"))
-            getProductData(query=model)
-
-            os.system('cls')
-            print(colored("+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+", color="cyan"))
-            repeat = input("Press Enter to query , or type 'exit' to quit: ")
-            if repeat.lower() == 'exit':
-                done = True
-            
-        # done = True
+        os.system('cls')
+        print(colored("+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+_-_-_+\n", color="cyan"))
+        done = True if input("Press Enter to query another code. Enter 'exit' to quit the program: ") == 'exit' else False

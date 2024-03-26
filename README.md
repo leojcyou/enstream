@@ -4,7 +4,7 @@ Description
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install dependeicies in requirements.txt.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install dependencies in requirements.txt.
 
 ```bash
 pip install requirements.txt
