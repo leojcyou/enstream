@@ -1,0 +1,6 @@
+DrissionPage==4.0.4.16
+DrissionPage==4.0.4.16
+parsel==1.9.0
+Requests==2.31.0
+termcolor==2.4.0
+yaspin==3.0.1
