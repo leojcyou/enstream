@@ -1,6 +1,6 @@
 # EnStream LP WebScraper
 
-Description
+A web-scraping tool that finds prices and products for devices using their 8-digit TAC codes. 
 
 ## Installation
 
