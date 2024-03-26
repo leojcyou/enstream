@@ -1,16 +1,22 @@
-# Project Name
+# EnStream LP WebScraper
 
-Description of the project.
-
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+Description
 
 ## Installation
 
-Instructions on how to install the project:
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install dependeicies in requirements.txt.
 
 ```bash
+pip install requirements.txt
+```
+
+## Usage
+This is a CLI tool. Please run main.py from the terminal.
+```shell
+#in the src directory containing main.py:
+./main.py
+```
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
