@@ -4,11 +4,11 @@ from termcolor import colored
 def display(productObj):
     print("View discovered products:\n")
 
+    #sSorting configuration
     sort = []
     sort.append(input("Sort by price [1] or rating [2]: "))
     sort.append(input("Sort ascending [1] or descending [2]: "))
-    products = []
-                
+    
     sortKey = sort[0] if sort and sort[0] in ['1', '2'] else '2'
     sortOrder = sort[1] if len(sort) == 2 and sort[1] in ['1', '2'] else '2'
     order = sortOrder == '1' #if sort order is ascending
@@ -18,9 +18,10 @@ def display(productObj):
     elif sortKey == '2':
         productObj.sortRating(ascending=order)
 
+    #Display variables
     total = len(productObj.products)
     itemIndex = 0
-    savedItems = []
+    savedItems = [] #items of interest
 
     while itemIndex < total:
         os.system('cls')

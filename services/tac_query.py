@@ -40,6 +40,7 @@ def getModel(code: str):
             sp.write("> An error occurred!")
             sp.ok("X")
 
+            #403 and 404 error handling
             print("\nAn error occured while attempting to determine your TAC's associated device. Please verify your number is correct and your Chrome runtime is up-to-date.\n")
             manual = getUserConfirmation("You may also elect to manually input your device model.\nWould you like to do so? (Y/N): ")
             if manual == "Y":
