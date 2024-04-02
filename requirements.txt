@@ -1,4 +1,3 @@
-DrissionPage==4.0.4.16
 DrissionPage==4.0.4.17
 numpy==1.26.4
 parsel==1.9.0
