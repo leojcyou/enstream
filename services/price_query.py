@@ -3,6 +3,8 @@ import requests
 from parsel import Selector
 from yaspin import yaspin
 import numpy as np
+from DrissionPage import ChromiumPage
+from urllib.parse import urlencode
 
 class ProductResults:
     def __init__(self):
@@ -58,15 +60,16 @@ def getProductData(model: str):
         "gl": "ca", 
         "tbm": "shop"
     }
-
-    #Headers with user-agent to prevent 403 error
+    base_url="https://www.google.com/search"
+    encoded_params = urlencode(params)
+    full_url = f"{base_url}?{encoded_params}"
     headers = { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0" }
 
     with yaspin(text=f'Retrieving product prices for {model}.', color="cyan") as sp:
         time.sleep(1)
         sp.write("> Scraping the web for product prices.")
-        html = requests.get("https://www.google.com/search", params=params, headers=headers, timeout=30)
-        selector = Selector(html.text)
+        response = requests.request("GET", full_url, headers=headers, data={})
+        selector = Selector(response.text)
         res = []
 
         #Parsing the returned results and mapping to object
