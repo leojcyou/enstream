@@ -16,8 +16,6 @@ This is a CLI tool. Please run main.py from the terminal.
 #in the src directory containing main.py:
 ./main.py
 ```
-## Photos
-![image](https://github.com/leojcyou/enstream/assets/108024684/9152e97d-faab-4c5b-8e6c-11b607213b9f)
 
 ## License
 
