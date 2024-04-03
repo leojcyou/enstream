@@ -7,7 +7,7 @@ A web-scraping tool that finds prices and products for devices using their 8-dig
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install dependencies in requirements.txt. Please ensure to have Chrome Web Browser installed as well.
 
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Usage
